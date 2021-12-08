@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: client-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: client
+    template:
+        metadata:
+            labels:
+                app: client
+        spec:
+            containers:
+                - name: client
+                  image: saalikmubeen78/microservices-client # us.gcr.io/microservices-333218/client
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: client-service
+spec:
+    selector:
+        app: client
+    ports:
+        - name: client
+          protocol: TCP
+          port: 3000
+          targetPort: 3000

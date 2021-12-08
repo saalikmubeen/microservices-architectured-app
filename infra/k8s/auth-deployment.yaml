@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: auth-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: auth
+    template:
+        metadata:
+            labels:
+                app: auth
+        spec:
+            containers:
+                - name: auth
+                  image: saalikmubeen78/microservices-auth # us.gcr.io/microservices-333218/auth
+                  env:
+                      - name: JWT_SECRET
+                        valueFrom:
+                            secretKeyRef:
+                                name: jwt-secret
+                                key: SECRET
+
+                      - name: MONGO_URI 
+                        value: "mongodb://auth-mongo-service:27017/auth"
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: auth-service
+spec:
+    selector:
+        app: auth
+    ports:
+        - name: auth
+          protocol: TCP
+          port: 3000
+          targetPort: 3000

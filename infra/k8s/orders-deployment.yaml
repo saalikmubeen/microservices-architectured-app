@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: orders-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: orders
+    template:
+        metadata:
+            labels:
+                app: orders
+        spec:
+            containers:
+                - name: orders
+                  image: saalikmubeen78/microservices-orders # us.gcr.io/microservices-333218/orders
+                  env:
+                      - name: JWT_SECRET
+                        valueFrom:
+                            secretKeyRef:
+                                name: jwt-secret
+                                key: SECRET
+
+                      - name: MONGO_URI
+                        value: "mongodb://orders-mongo-service:27017/orders"
+
+                      - name: NATS_CLUSTER_ID
+                        value: "ticketing"
+
+                      - name: NATS_URL
+                        value: "http://nats-service:4222"
+
+                      - name: NATS_CLIENT_ID
+                        valueFrom:
+                            fieldRef:
+                                fieldPath: metadata.name # name of the pod
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: orders-service
+spec:
+    selector:
+        app: orders
+    ports:
+        - name: orders
+          protocol: TCP
+          port: 3000
+          targetPort: 3000

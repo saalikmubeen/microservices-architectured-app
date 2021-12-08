@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: expiration-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: expiration
+    template:
+        metadata:
+            labels:
+                app: expiration
+        spec:
+            containers:
+                - name: expiration
+                  image: saalikmubeen78/microservices-expiration # us.gcr.io/microservices-333218/expiration
+                  env:
+                      - name: REDIS_HOST
+                        value: expiration-redis-service
+
+                      - name: NATS_CLUSTER_ID
+                        value: "ticketing"
+
+                      - name: NATS_URL
+                        value: "http://nats-service:4222"
+
+                      - name: NATS_CLIENT_ID
+                        valueFrom:
+                            fieldRef:
+                                fieldPath: metadata.name # name of the pod

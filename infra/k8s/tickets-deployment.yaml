@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: tickets-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: tickets
+    template:
+        metadata:
+            labels:
+                app: tickets
+        spec:
+            containers:
+                - name: tickets
+                  image: saalikmubeen78/microservices-tickets # us.gcr.io/microservices-333218/tickets
+                  env:
+                      - name: JWT_SECRET
+                        valueFrom:
+                            secretKeyRef:
+                                name: jwt-secret
+                                key: SECRET
+
+                      - name: MONGO_URI
+                        value: "mongodb://tickets-mongo-service:27017/tickets"
+
+                      - name: NATS_CLUSTER_ID
+                        value: "ticketing"
+
+                      - name: NATS_URL
+                        value: "http://nats-service:4222"
+
+                      - name: NATS_CLIENT_ID
+                        valueFrom:
+                            fieldRef:
+                                fieldPath: metadata.name # name of the pod
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: tickets-service
+spec:
+    selector:
+        app: tickets
+    ports:
+        - name: tickets
+          protocol: TCP
+          port: 3000
+          targetPort: 3000

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: payments-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: payments
+    template:
+        metadata:
+            labels:
+                app: payments
+        spec:
+            containers:
+                - name: payments
+                  image: saalikmubeen78/microservices-payments # us.gcr.io/microservices-333218/payments
+                  env:
+                      - name: JWT_SECRET
+                        valueFrom:
+                            secretKeyRef:
+                                name: jwt-secret
+                                key: SECRET
+
+                      - name: STRIPE_SECRET_KEY
+                        valueFrom:
+                            secretKeyRef:
+                                name: stripe
+                                key: secretKey
+
+                      - name: MONGO_URI
+                        value: "mongodb://payments-mongo-service:27017/payments"
+
+                      - name: NATS_CLUSTER_ID
+                        value: "ticketing"
+
+                      - name: NATS_URL
+                        value: "http://nats-service:4222"
+
+                      - name: NATS_CLIENT_ID
+                        valueFrom:
+                            fieldRef:
+                                fieldPath: metadata.name # name of the pod
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: payments-service
+spec:
+    selector:
+        app: payments
+    ports:
+        - name: payments
+          protocol: TCP
+          port: 3000
+          targetPort: 3000

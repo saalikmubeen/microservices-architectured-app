@@ -1,0 +1,59 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+    kubectl:
+        manifests:
+            - ./infra/k8s/*
+build:
+    local:
+        push: false
+    # googleCloudBuild:
+    #     projectId: microservices-333218
+    artifacts:
+        - image: saalikmubeen78/microservices-auth # us.gcr.io/microservices-333218/auth
+          context: auth
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              infer:
+                  - "src/**/*.ts"
+
+        - image: saalikmubeen78/microservices-client # us.gcr.io/microservices-333218/client
+          context: client
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              infer:
+                  - "**/*.js"
+
+        - image: saalikmubeen78/microservices-tickets # us.gcr.io/microservices-333218/tickets
+          context: tickets
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              infer:
+                  - "src/**/*.ts"
+
+        - image: saalikmubeen78/microservices-orders # us.gcr.io/microservices-333218/orders
+          context: orders
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              infer:
+                  - "src/**/*.ts"
+
+        - image: saalikmubeen78/microservices-expiration # us.gcr.io/microservices-333218/expiration
+          context: expiration
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              infer:
+                  - "src/**/*.ts"
+
+        - image: saalikmubeen78/microservices-payments # us.gcr.io/microservices-333218/payments
+          context: payments
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              infer:
+                  - "src/**/*.ts"
