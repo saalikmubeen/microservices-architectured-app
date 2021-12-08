@@ -46,12 +46,12 @@ const Order = ({ order, currentUser }) => {
                 <em> Ticket: </em> {order.ticket.title} for Rs
                 {order.ticket.price}
             </p>
-            {/* <StripeCheckout
+            <StripeCheckout
                 token={({ id }) => sendRequest({ token: id })}
                 stripeKey="pk_test_51H8hlaJw1IphkJ3MAWTSFrRAGHCMouXlpV9U7KBXZDucnorqLqqpaYmcFPlzSD7CRarJTvjkKcukzuKcCoqBOM2x00gncJONo0"
                 amount={order.ticket.price * 100}
                 email={currentUser.email}
-            /> */}
+            />
             {errors}
         </div>
     );
