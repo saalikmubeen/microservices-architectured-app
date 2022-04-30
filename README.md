@@ -50,4 +50,4 @@ The app is divided into 7 services that handle and implement a specific feature 
 # ⚡WARNING⚡
 
 Try running and testing it locally only if you consider yourself a senior developer 👍. Otherwise I'm not the one to blame for you scratching your head 😫
-while trying to understand this micreoservices mess of event-driven communication betweewn the services 😑
+while trying to understand this microservices mess of event-driven communication betweewn the services 😑
