@@ -44,8 +44,33 @@ The app is divided into 7 services that handle and implement a specific feature 
 - `common` all the common functionality like requireAuth, error handling, and other middlewares and functions shared by different services are grouped together. 
             This service is published as an npm package and installed in other services to be used. 
 - `client` handles and implements the frontend of the app.
+- `infra`  manages all the kubernets deployment and service .yaml files that run run the app
 
 
+# Kubernetes and Docker Architecture
+
+Each service, mogongodb database and nats-streaming server is dockerized as a docker container. The docker conatiners are managed and orchestrated by their respective kubernetes deployment.yaml files inside infra directory. The communication between different kuberentes deployments is governed by service ObjectType.
+Finally ingress-service, uses ingress-nginx, an Ingress controller for Kubernetes using NGINX as a reverse proxy to proxy or direct incoming requests to their
+respective services under the `ticketing.dev` hostname. Skaffold is used to get all the kubernetes deployments and services up and running with a single command 
+`skaffold dev` which uses skaffold.yaml.
+
+
+#  Installation 
+
+Getting this project up and running on your local machine is a notoriously dfficult task. It requires some knowlege of docker and kubernetes ecosystem. If you 
+are still up for challenge, or if you don't have a life, try getting it work. Make sure you have docker, kubernetes and skaffold installed. Set the required envirenmental variables and run the following command:
+
+```
+skaffold dev
+```
+
+And boom app will be up and running, extra setup and dependencies required.
+
+To delete any resources deployed by Skaffold and stop all the deployments, services and containers run 
+
+```
+skaffold delete
+```
 
 # ⚡WARNING⚡
 
