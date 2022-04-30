@@ -44,3 +44,10 @@ The app is divided into 7 services that handle and implement a specific feature 
 - `common` all the common functionality like requireAuth, error handling, and other middlewares and functions shared by different services are grouped together. 
             This service is published as an npm package and installed in other services to be used. 
 - `client` handles and implements the frontend of the app.
+
+
+
+# ⚡WARNING⚡
+
+Try running and testing it locally only if you consider yourself a senior developer 👍. Otherwise I'm not the one to blame for you scratching your head 😫
+while trying to understand this micreoservices mess of event-driven communication betweewn the services 😑
