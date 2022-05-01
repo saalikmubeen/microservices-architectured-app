@@ -76,6 +76,8 @@ skaffold delete
 Try running and testing it locally only if you don't have a life. Otherwise I'm not the one to blame for you scratching your head 😫
 while trying to understand this microservices mess of event-driven communication betweewn the services 😑
 
+
+
 ### Note 
 
 I did this project as a part of [Stephen Grider's](https://github.com/StephenGrider) Udemy Course. Thanks to him 😊
