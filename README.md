@@ -78,4 +78,4 @@ while trying to understand this microservices mess of event-driven communication
 
 ### Note 
 
-I did this project as a part of Stephen Grider's Udemy Course. Thanks to him 😊
+I did this project as a part of [Stephen Grider's](https://github.com/StephenGrider) Udemy Course. Thanks to him 😊
