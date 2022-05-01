@@ -75,4 +75,4 @@ skaffold delete
 # ⚡WARNING⚡
 
 Try running and testing it locally only if you consider yourself a senior developer 👍. Otherwise I'm not the one to blame for you scratching your head 😫
-while trying to understand this microservices mess of event-driven communication betweewn the services 😑
+while trying to understand this microservices mess of event-driven communication between the services 😑
