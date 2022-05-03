@@ -1,3 +1,9 @@
+
+## Checkout my other project
+
+##### [Talkhouse](https://github.com/saalikmubeen/talkhouse) | WebRTC based peer to peer voice, video calling and messaging web app
+
+
 # microservices-architectured-app
 An event-driven asynchronous communication based microservices architectured e-commerce app created using express, typescript, nats-streaming and next.js
 
@@ -75,7 +81,3 @@ while trying to understand this microservices mess of event-driven communication
 
 I did this project as a part of [Stephen Grider's](https://github.com/StephenGrider) Udemy Course. Thanks to him 😊
 
-
-### Checkout my other project
-
-[Talkhouse](https://github.com/saalikmubeen/talkhouse) | WebRTC based peer to peer voice, video calling and messaging web app
