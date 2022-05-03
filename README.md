@@ -1,7 +1,7 @@
 
-## Checkout my other project
+# Checkout my other project
 
-##### [Talkhouse](https://github.com/saalikmubeen/talkhouse) | WebRTC based peer to peer voice, video calling and messaging web app
+*[Join the Talkhouse Family😊](https://github.com/saalikmubeen/talkhouse) | WebRTC based peer to peer voice, video calling and messaging web app build with MERN stack*
 
 
 # microservices-architectured-app
